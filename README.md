@@ -5,7 +5,10 @@
 ## API Endpoints
 
 ### Login
-- Same as example
+Input Parameters
+- login
+- password
+
 
 ### AddContact
 Input Parameters
@@ -15,6 +18,7 @@ Input Parameters
 - email
 - phone
 - dateCreated
+
 
 ### SearchContact
 
