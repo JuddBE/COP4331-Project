@@ -1,9 +1,30 @@
 .background {
-    background: url('../images/michael-discenza-5omwAMDxmkU-unsplash.jpg') no-repeat; width: 100%; height: 100vh;
+    background: url('../images/newyork.jpg') no-repeat; width: 100%; height: 100vh;
     background-size: cover;
     background-attachment: fixed;
-
 } 
+
+.title-container {
+    padding-top: 0.5%;
+    padding-bottom: 1%;
+}
+
+.rows-container {
+    border: 0px #010000;
+}
+
+.contacts-container {
+    background: blanchedalmond;
+    background-size: cover;
+    background-attachment: fixed;
+    border: 2px solid #010000;
+    align-items: center;
+    padding-bottom: 1.2%;
+}
+
+.index-container {
+    margin-top: 0px;
+}
 
 .form-container {
     border: 1px solid #010000;
@@ -12,6 +33,11 @@
     box-shadow: -1px 4px 26px 11px rgba(0, 0, 0, 0.35);
 }
 
+.contact {
+    font-size: larger;
+    font-weight: bold;
+    padding-top: 1%;
+}
 
 .btn {
     color: #00102A;
