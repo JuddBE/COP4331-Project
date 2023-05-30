@@ -12,6 +12,7 @@ Input Prameters
 - lastName
 - login
 - password
+- use regex to check email and phone number is valid
 
 ### Login
 Input Parameters
