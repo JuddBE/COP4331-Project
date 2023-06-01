@@ -1,0 +1,55 @@
+.background {
+    background: url('../images/newyork.jpg') no-repeat; width: 100%; height: 100vh;
+    background-size: cover;
+    background-attachment: fixed;
+} 
+
+.title-container {
+    padding-top: 0.5%;
+    padding-bottom: 1%;
+    background: coral;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.rows-container {
+    background: blanchedalmond;
+    background-attachment: fixed;
+    border: 0px #010000;
+}
+
+.contacts-container {
+    border: 2px solid #010000;
+}
+
+.form-container {
+    border: 1px solid #010000;
+    background: blanchedalmond;
+    background-size: cover;
+    padding: 10% 12%;
+    margin-top: 5%;
+    box-shadow: -1px 4px 26px 11px rgba(0, 0, 0, 0.35);
+}
+
+.contact {
+    font-size: larger;
+    font-weight: bold;
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
+
+.btn {
+    color: #00102A;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: bolder;
+    font-size: 20px;
+    background: blanchedalmond;
+    background-size: cover;
+    border: 0px;
+    cursor: pointer;
+    padding:0.3em 1.2em;
+    margin:0.6em 0.3em 0.3em 0;
+    float: left;
+}
+ 

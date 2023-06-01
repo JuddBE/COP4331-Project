@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Signup</title>
+	<script type="text/javascript" src="js/md5.js"></script>
+	<script type="text/javascript" src="js/code.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+</head>
+
+<body>
+	<div class="container-fluid background">
+        <ul class="nav justify-content-end">
+            <li class="nav-item">
+              <button class="btn" onclick="location.href = 'index.html'">Home</button>
+            </li>
+            <li class="nav-item">
+                <button class ="btn" onclick="location.href = 'login.html'">Login</button>
+            </li>
+          </ul>
+		<div class="row">
+			<div class="col-md-4 col-sm-4 col-xs-12"></div>
+			<div class="col-md-4 col-sm-4 col-xs-12">
+			<!--form starts here-->
+                    <div class="row mb-3">
+					  <label for="inputFirstName3" class="col-sm-2 col-form-label">FirstName</label>
+					  <div class="col-sm-10">
+						<input type="FirstName" class="form-control" id="inputFirstName" required
+                        autocomplete="on">
+					  </div>
+					</div>
+                    <div class="row mb-3">
+                        <label for="inputLastName3" class="col-sm-2 col-form-label">LastName</label>
+                        <div class="col-sm-10">
+                          <input type="LastName" class="form-control" id="inputLastName" required
+                          autocomplete="on">
+                        </div>
+                    </div>
+					<div class="row mb-3">
+					  <label for="inputUserName3" class="col-sm-2 col-form-label">UserName</label>
+					  <div class="col-sm-10">
+						<input type="UserName" class="form-control" id="inputUserName3" required>
+					  </div>
+					</div>
+					<div class="row mb-3">
+					  <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+					  <div class="col-sm-10">
+						<input type="password" class="form-control" id="inputPassword3" required>
+					  </div>
+					</div>
+					<div class="row mb-3">
+					  <div class="col-sm-10 offset-sm-2">
+						<div class="form-check">
+						  <input class="form-check-input" type="checkbox" id="gridCheck1">
+						  <label class="form-check-label" for="gridCheck1">
+							Remember me
+						  </label>
+						</div>
+					  </div>
+					</div>
+                    <div class="d-grid">
+                        <button class="btn btn-success" type="submit">Submit</button>
+                    </div>
+                  <!--form ends here-->
+			</div>
+			<div class="col-md-4-col col-sm-4 col-xs-12"></div>
+		</div>
+	</div>
+	<script src="node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    
+</body>
+</html>
