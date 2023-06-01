@@ -24,8 +24,10 @@
 
 .form-container {
     border: 1px solid #010000;
-    padding: 50px 60px;
-    margin-top: 20vh;
+    background: blanchedalmond;
+    background-size: cover;
+    padding: 10% 12%;
+    margin-top: 5%;
     box-shadow: -1px 4px 26px 11px rgba(0, 0, 0, 0.35);
 }
 
