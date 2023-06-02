@@ -1,33 +1,41 @@
 <?php
+
 	$inData = getRequestInfo();
 
-	$firstName = "";
-	$lastName = "";
-	$login = "";
-	$password = ""; 
+	$firstName = $inData["firstName"];
+    $lastName = $inData["lastName"];
+    $login = $inData["login"];
+    $password = $inData["password"];
 
 	$conn = new mysqli("localhost", "fb", "123", "COP4331");
-
-	if($conn->connect_error)
+	if ($conn->connect_error)
 	{
-		returnWithError($conn->connect_error);
+		returnWithError( $conn->connect_error );
 	}
 	else
 	{
-		$stmt = $conn->prepare("INSERT into Users (firstName, lastName, Login, Password) VALUES (?, ?, ?, ?)");
-		$stmt->bind_param("ssss", $inData["firstName"], $inData["lastName"], $inData["Login"], $inData["Password"]);
+		$sql = "SELECT * FROM Users WHERE Login=?";
+		$stmt = $conn->prepare($sql);
+		$stmt->bind_param("s", $login);
 		$stmt->execute();
-		if($stmt->affected_rows > 0) // if successful
+		$result = $stmt->get_result();
+		$rows = mysqli_num_rows($result);
+		if ($rows == 0)
 		{
-			sendResultInfoAsJson("successful ^_^");
-		}
-		else
-		{
-			sendResultInfoAsJson("Unable to create account");
-		}
-		$stmt->close();
-		$conn->close();
+			$stmt = $conn->prepare("INSERT into Users (FirstName, LastName, Login, Password) VALUES(?,?,?,?)");
+			$stmt->bind_param("ssss", $firstName, $lastName, $login, $password);
+			$stmt->execute();
+			$id = $conn->insert_id;
+			$stmt->close();
+			$conn->close();
+			http_response_code(200);
+			$searchResults .= '{'.'"id": "'.$id.''.'"}';
 
+			returnWithInfo($searchResults);
+		} else {
+			http_response_code(409);
+			returnWithError("Username taken");
+		}
 	}
 
 	function getRequestInfo()
@@ -35,20 +43,21 @@
 		return json_decode(file_get_contents('php://input'), true);
 	}
 
-	function sendResultInfoAsJson($obj)
+	function sendResultInfoAsJson( $obj )
 	{
 		header('Content-type: application/json');
 		echo $obj;
 	}
 
-	function returnWithError($obj)
+	function returnWithError( $err )
 	{
-		sendResultInfoAsJson($obj);
+		$retValue = '{"error":"' . $err . '"}';
+		sendResultInfoAsJson( $retValue );
 	}
-	
+	function returnWithInfo( $searchResults )
+	{
+		$retValue = '{"results":[' . $searchResults . '],"error":""}';
+		sendResultInfoAsJson( $retValue );
+	}
 
 ?>
-
-
-
-
