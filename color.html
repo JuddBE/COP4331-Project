@@ -10,6 +10,13 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+
+	<script type="text/javascript">
+		document.addEventListener('DOMContentLoaded', function() 
+		{
+			readCookie();
+		}, false);
+	</script>
 </head>
 <body>
 	<div class="container-fluid background">
@@ -20,81 +27,47 @@
         </ul>
 		<div class="container">
 			<div class="row justify-content-center">
-				<div class="col-md-6">
+				<div class="col-md-8">
 					<div class="input-group mb-3">
-						<input type="text" class="form-control" placeholder="Search contact..." aria-describedby="basic-addon1">
+						<input  id="searchText" type="text" class="form-control" placeholder="Search contact..." aria-describedby="basic-addon1">
+						<button class="btn btn-warning" id="searchContactButton" onclick=searchContacts()>Search</button>
+						<span id="contactSearchResult"></span>
+						<p id="contactList">
+						</p><br /><br>
+						
+						<button type="button" id="addContactButton" class="btn btn-warning" onclick=addContact()>Add Contact</button>
+						<span id="contactAddResult"></span>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="container-xl contacts-container">
-			<div class="row text-center title-container border-bottom border-dark">
-				<div class="col contact">
-					First Name
-				</div>
-				<div class="col contact">
-					Last Name
-				</div>
-				<div class="col contact">
-					Email
-				</div>
-				<div class="col contact">
-					Phone
-				</div>
-				<div class="col contact">
-					Date Added
-				</div>
+		<div class="row justify-content-center">
+			<div class="col-lg-9">
+				<table id="contacts" cellpadding="0" cellspacing="0" border="2">
+					<thread>
+						<tr>
+							<th>First Name</th>
+							<th>Last Name</th>
+							<th>Email</th>
+							<th>Phone</th>
+							<th>Edit Contact</th>
+						</tr>
+					</thread>
+					<tbody id="tbody"></tbody>
+				</table>
 			</div>
-			<div class="rows-container">
-				<div class="row text-center">
-					<div class="col contact border border-dark">
-						First Name
-					</div>
-					<div class="col contact border border-dark">
-						Last Name
-					</div>
-					<div class="col contact border border-dark">
-						Email
-					</div>
-					<div class="col contact border border-dark">
-						Phone
-					</div>
-					<div class="col contact border border-dark">
-						Date Added
-					</div>
-				</div>
-				<div class="row text-center">
-					<div class="col contact border border-dark">
-						First Name
-					</div>
-					<div class="col contact border border-dark">
-						Last Name
-					</div>
-					<div class="col contact border border-dark">
-						Email
-					</div>
-					<div class="col contact border border-dark">
-						Phone
-					</div>
-					<div class="col contact border border-dark">
-						Date Added
-					</div>
-				</div>
-			</div>
-			
 		</div>
-		
 	</div>
 
-	<div id="accessUIDiv">
+	<!-- <div id="accessUIDiv">
 		<br />
 	
 		<input type="text" id="searchText" placeholder="Contact To Search For"/>
-		<button type="button" id="searchContact" class="buttons" onclick="searchContact();"> Search Contact </button><br />
+		<button type="button" id="searchContact" class="buttons" onclick="searchContacts();"> Search Contact </button><br />
 		<span id="contactSearchResult"></span>
 		<p id="contactList">
 		</p><br /><br />
-	</div>
+	</div> -->
 
 		<script src="node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>	
 </body>
@@ -112,14 +85,6 @@
 	<script type="text/javascript" src="js/code.js"></script>
     <link href="css/styles.css" rel="stylesheet">	
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
-	
-	<script type="text/javascript">
-	document.addEventListener('DOMContentLoaded', function() 
-	{
-		readCookie();
-	}, false);
-	</script>
-	
 </head>
 <body>
 

@@ -4,6 +4,29 @@
     background-attachment: fixed;
 } 
 
+.tables {
+    align-self: center;
+}
+
+table {
+    width:100%;
+    table-layout: fixed;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+#contacts th {
+    padding: 15px 12px;
+    text-align: center;
+    font-family: 'Montserrat';
+    font-weight: 500;
+    font-size: 16px;
+    font-weight: bold;
+    color: #060505;
+    background-color: blanchedalmond;
+}
+
 .title-container {
     padding-top: 0.5%;
     padding-bottom: 1%;

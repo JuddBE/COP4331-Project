@@ -1,4 +1,4 @@
-const urlBase = 'http://COP4331-18.online';
+const urlBase = 'http://COP4331-18.online/LAMPAPI';
 const extension = 'php';
 
 let userId = 0;
@@ -13,11 +13,11 @@ function doLogin()
 	
 	let login = document.getElementById("loginName").value;
 	let password = document.getElementById("loginPassword").value;
-    var hash = md5( password );
-	
+    // var hash = md5( password );
+
 	document.getElementById("loginResult").innerHTML = "";
 
-	var tmp = {login:login,password:hash};
+	var tmp = {login:login,password:password};
 	let jsonPayload = JSON.stringify( tmp );
 	
 	let url = urlBase + '/Login.' + extension;
@@ -55,6 +55,57 @@ function doLogin()
 		document.getElementById("loginResult").innerHTML = err.message;
 	}
 
+}
+
+function doSignup() 
+{
+    firstName = document.getElementById("firstName").value;
+    lastName = document.getElementById("lastName").value;
+
+    let username = document.getElementById("userName").value;
+    let password = document.getElementById("password").value;
+
+    // var hash = md5(password);
+	
+    document.getElementById("signupResult").innerHTML = "";
+
+    let tmp = {firstName:firstName,lastName:lastName,login:username,password:password};
+
+    let jsonPayload = JSON.stringify(tmp);
+
+    let url = urlBase + '/SignUp.' + extension;
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+    try {
+        xhr.onreadystatechange = function () {
+
+            if (this.readyState != 4) {
+                return;
+            }
+
+            if (this.status == 409) {
+                document.getElementById("signupResult").innerHTML = "User already exists";
+                return;
+            }
+
+            if (this.status == 200) {
+
+                let jsonObject = JSON.parse(xhr.responseText);
+                userId = jsonObject.id;
+                document.getElementById("signupResult").innerHTML = "User added successfully";
+                firstName = jsonObject.firstName;
+                lastName = jsonObject.lastName;
+                saveCookie();
+            }
+        };
+
+        xhr.send(jsonPayload);
+    } catch (err) {
+        document.getElementById("signupResult").innerHTML = err.message;
+    }
 }
 
 function saveCookie()
@@ -179,18 +230,17 @@ function searchColor()
 	catch(err)
 	{
 		document.getElementById("colorSearchResult").innerHTML = err.message;
-	}
-	
+	}	
 }
 
-function searchContact()
+function searchContacts()
 {
 	let srch = document.getElementById("searchText").value;
 	document.getElementById("contactSearchResult").innerHTML = "";
 	
 	let contactList = "";
 
-	let tmp = {search:srch,userId:userId};
+	let tmp = {userId:userId,search:srch};
 	let jsonPayload = JSON.stringify( tmp );
 
 	let url = urlBase + '/SearchContact.' + extension;
@@ -209,7 +259,7 @@ function searchContact()
 				
 				for( let i=0; i<jsonObject.results.length; i++ )
 				{
-					contactList += jsonObject.results[i];
+					contactList += jsonObject.results[i].FirstName;
 					if( i < jsonObject.results.length - 1 )
 					{
 						contactList += "<br />\r\n";
