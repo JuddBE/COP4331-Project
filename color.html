@@ -25,20 +25,38 @@
 				<button class ="btn" onclick="doLogout();">Logout</button>
             </li>
         </ul>
-		<div class="container">
+		<div class="container-lg">
 			<div class="row justify-content-center">
-				<div class="col-md-8">
-					<div class="input-group mb-3">
-						<input  id="searchText" type="text" class="form-control" placeholder="Search contact..." aria-describedby="basic-addon1">
-						<button class="btn btn-warning" id="searchContactButton" onclick=searchContacts()>Search</button>
-						<span id="contactSearchResult"></span>
-						<p id="contactList">
-						</p><br /><br>
-						
-						<button type="button" id="addContactButton" class="btn btn-warning" onclick=addContact()>Add Contact</button>
-						<span id="contactAddResult"></span>
+				<div class="col-md-6">
+					<div class="input-group">
+						<input  class="form-control" id="searchText" type="text" placeholder="Search contact..." aria-describedby="basic-addon1">
 					</div>
 				</div>
+				<div class="col-md-2">
+					<button class="btn btn-warning align-top" id="searchContactButton" onclick=searchContacts()>Search</button>
+					<!-- <button class="btn btn-warning" type="button" id="addContactButton" onclick=addContactDisplay()>Add Contact</button> -->
+					<span id="contactSearchResult"></span>
+				</div>
+			</div>
+		</div>
+		<div class="container-lg">
+			<div class="row justify-content-center addContact">
+				<div class="col-md-2">
+					<input class="form-control" type="text" id="newContactFirstNameText" placeholder="First Name" required>
+				</div>
+				<div class="col-md-2">
+					<input class="form-control" type="text" id="newContactTLastNameText" placeholder="Last Name" required>
+				</div>
+				<div class="col-md-3">
+					<input class="form-control" type="text" id="newContactPhoneText" placeholder="XXX-XXX-XXXX" required>
+				</div>
+				<div class="col-md-3">
+					<input class="form-control" type="text" id="newContactEmailText" placeholder="foo@email.com" required>
+				</div>
+				<div class="col-sm-1">
+					<button class="btn btn-warning align-top" type="button" id="addContactButton" onclick="addContact()">Add</button>
+					<span id="contactAddResult"></span>
+				</div>			
 			</div>
 		</div>
 		<div class="row justify-content-center">

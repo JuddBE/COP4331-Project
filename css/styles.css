@@ -27,6 +27,32 @@ table {
     background-color: blanchedalmond;
 }
 
+#contacts td {
+    padding: 6px;
+    text-align: center;
+    font-family: 'Montserrat';
+    border: 1px solid #060505;
+    vertical-align: middle;
+    font-weight: 500;
+    font-size: 16px;
+    font-weight: bold;
+    word-wrap: break-word;
+    color: #060505;
+    background-color: blanchedalmond;
+}
+
+#contacts td span {
+    display: block;
+    font-size: 100%;
+}
+
+.addContact {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    align-self: center;
+    display: none;
+}
+
 .title-container {
     padding-top: 0.5%;
     padding-bottom: 1%;
