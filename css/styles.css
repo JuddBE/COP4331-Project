@@ -46,6 +46,13 @@ table {
     font-size: 100%;
 }
 
+.addContact {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    align-self: center;
+    display: none;
+}
+
 .title-container {
     padding-top: 0.5%;
     padding-bottom: 1%;
