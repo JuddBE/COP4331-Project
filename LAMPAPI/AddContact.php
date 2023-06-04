@@ -7,11 +7,10 @@
 	}
 
 	$userId = $inData["userId"];
-    $firstName = $inData["fistName"];
+    $firstName = $inData["firstName"];
     $lastName = $inData["lastName"];
-    $email = $inData["email"]
+    $email = $inData["email"];
     $phone = $inData["phone"];
-    $dateCreated = $inData["dateCreated"];
 
 	$conn = new mysqli("localhost", "fb", "123", "COP4331"); 
 	//$conn = new mysqli("localhost", "Judd", "LetsG0Gamers", "COP4331");
@@ -21,12 +20,11 @@
 	} 
 	else
 	{
-		$stmt = $conn->prepare("INSERT into Contacts (UserId,Name) VALUES(?,?,?,?,?,?)");
-		$stmt->bind_param("ssssss", $userId, $firstName, $lastName, $email, $phone, $dateCreated);
+		$stmt = $conn->prepare("INSERT into Contacts (FirstName, LastName, Phone, Email, UserID) VALUES(?,?,?,?,?)");
+		$stmt->bind_param("sssss", $firstName, $lastName, $phone, $email, $userId );
 		$stmt->execute();
 		$stmt->close();
 		$conn->close();
-		returnWithError("");
 	}
 
 	function getRequestInfo()
