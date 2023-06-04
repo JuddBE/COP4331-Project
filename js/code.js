@@ -257,16 +257,31 @@ function searchContacts()
 				document.getElementById("contactSearchResult").innerHTML = "Contact(s) has been retrieved";
 				let jsonObject = JSON.parse( xhr.responseText );
 				
-				for( let i=0; i<jsonObject.results.length; i++ )
-				{
-					contactList += jsonObject.results[i].FirstName;
-					if( i < jsonObject.results.length - 1 )
-					{
-						contactList += "<br />\r\n";
-					}
-				}
+				let text = "<table border='1'>"
+                for (let i = 0; i < jsonObject.results.length; i++) {
+                    text += "<tr id='row" + i + "'>"
+                    text += "<td id='firstName" + i + "'><span>" + jsonObject.results[i].FirstName + "</span></td>";
+                    text += "<td id='lastName" + i + "'><span>" + jsonObject.results[i].LastName + "</span></td>";
+                    text += "<td id='email" + i + "'><span>" + jsonObject.results[i].Email + "</span></td>";
+                    text += "<td id='phone" + i + "'><span>" + jsonObject.results[i].Phone + "</span></td>";
+                    text += "<td>" +
+                        "<button class='btn btn-warning btn-sm' id='edit_button" + i + "'><span>Edit</span></button>" +
+                        "<button class='btn btn-warning btn-sm' id='save_button" + i + "' value='Save' style='display: none'><span>Save</span></button>" +
+                        "<button class='btn btn-warning btn-sm'><span>Delete</span></button>" + "</td>";
+                    text += "<tr/>"
+                }
+                text += "</table>"
+				document.getElementById("tbody").innerHTML = text;
+				// for( let i=0; i<jsonObject.results.length; i++ )
+				// {
+				// 	contactList += jsonObject.results[i].FirstName;
+				// 	if( i < jsonObject.results.length - 1 )
+				// 	{
+				// 		contactList += "<br />\r\n";
+				// 	}
+				// }
 				
-				document.getElementsByTagName("p")[0].innerHTML = contactList;
+				// document.getElementsByTagName("p")[0].innerHTML = contactList;
 			}
 		};
 		xhr.send(jsonPayload);

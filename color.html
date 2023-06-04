@@ -27,17 +27,16 @@
         </ul>
 		<div class="container">
 			<div class="row justify-content-center">
-				<div class="col-md-8">
-					<div class="input-group mb-3">
+				<div class="col-md-6">
+					<div class="input-group">
 						<input  id="searchText" type="text" class="form-control" placeholder="Search contact..." aria-describedby="basic-addon1">
-						<button class="btn btn-warning" id="searchContactButton" onclick=searchContacts()>Search</button>
-						<span id="contactSearchResult"></span>
-						<p id="contactList">
-						</p><br /><br>
-						
-						<button type="button" id="addContactButton" class="btn btn-warning" onclick=addContact()>Add Contact</button>
-						<span id="contactAddResult"></span>
 					</div>
+				</div>
+				<div class="col-md-4">
+					<button class="btn btn-warning" id="searchContactButton" onclick=searchContacts()>Search</button>
+					<button type="button" id="addContactButton" class="btn btn-warning" onclick=addContact()>Add Contact</button>
+					<span id="contactSearchResult"></span>
+					<span id="contactAddResult"></span>
 				</div>
 			</div>
 		</div>
