@@ -164,6 +164,7 @@ function searchContacts()
 	let srch = document.getElementById("searchText").value;
 	document.getElementById("contactSearchResult").innerHTML = "";
 	
+	// Create empty list to append search results to
 	let contactList = "";
 
 	let tmp = {userId:userId,search:srch};
@@ -185,6 +186,10 @@ function searchContacts()
 				
 				let text = "<table border='1'>"
                 for (let i = 0; i < jsonObject.results.length; i++) {
+					// Sve each contact id from search result into array for accessing in edit, save, and delete
+					contactIds[i] = jsonObject.results[i].ContactId;
+
+					// Dsiplay search results in contact table on page and create edit and delete buttons
                     text += "<tr id='row" + i + "'>"
                     text += "<td id='firstName" + i + "'><span>" + jsonObject.results[i].FirstName + "</span></td>";
                     text += "<td id='lastName" + i + "'><span>" + jsonObject.results[i].LastName + "</span></td>";
@@ -208,41 +213,41 @@ function searchContacts()
 	}	
 }
 
-function editContact(id) {
-    document.getElementById("editButton" + id).style.display = "none";
-    document.getElementById("saveButton" + id).style.display = "inline-block";
+function editContact(rowNumber) {
+    document.getElementById("editButton" + rowNumber).style.display = "none";
+    document.getElementById("saveButton" + rowNumber).style.display = "inline-block";
 
-    var firstNameI = document.getElementById("firstName" + id);
-    var lastNameI = document.getElementById("lastName" + id);
-    var email = document.getElementById("email" + id);
-    var phone = document.getElementById("phone" + id);
+    var firstNameI = document.getElementById("firstName" + rowNumber);
+    var lastNameI = document.getElementById("lastName" + rowNumber);
+    var email = document.getElementById("email" + rowNumber);
+    var phone = document.getElementById("phone" + rowNumber);
 
     var namef_data = firstNameI.innerText;
     var namel_data = lastNameI.innerText;
     var email_data = email.innerText;
     var phone_data = phone.innerText;
 
-    firstNameI.innerHTML = "<input type='text' id='namef_text" + id + "' value='" + namef_data + "'>";
-    lastNameI.innerHTML = "<input type='text' id='namel_text" + id + "' value='" + namel_data + "'>";
-    email.innerHTML = "<input type='text' id='email_text" + id + "' value='" + email_data + "'>";
-    phone.innerHTML = "<input type='text' id='phone_text" + id + "' value='" + phone_data + "'>"
+    firstNameI.innerHTML = "<input type='text' id='namef_text" + rowNumber + "' value='" + namef_data + "'>";
+    lastNameI.innerHTML = "<input type='text' id='namel_text" + rowNumber + "' value='" + namel_data + "'>";
+    email.innerHTML = "<input type='text' id='email_text" + rowNumber + "' value='" + email_data + "'>";
+    phone.innerHTML = "<input type='text' id='phone_text" + rowNumber + "' value='" + phone_data + "'>"
 }
 
-function saveContact(id) {
-    var namef_val = document.getElementById("namef_text" + id).value;
-    var namel_val = document.getElementById("namel_text" + id).value;
-    var email_val = document.getElementById("email_text" + id).value;
-    var phone_val = document.getElementById("phone_text" + id).value;
+function saveContact(rowNumber) {
+    var namef_val = document.getElementById("namef_text" + rowNumber).value;
+    var namel_val = document.getElementById("namel_text" + rowNumber).value;
+    var email_val = document.getElementById("email_text" + rowNumber).value;
+    var phone_val = document.getElementById("phone_text" + rowNumber).value;
 
-    document.getElementById("firstName" + id).innerHTML = namef_val;
-    document.getElementById("lastName" + id).innerHTML = namel_val;
-    document.getElementById("email" + id).innerHTML = email_val;
-    document.getElementById("phone" + id).innerHTML = phone_val;
+    document.getElementById("firstName" + rowNumber).innerHTML = namef_val;
+    document.getElementById("lastName" + rowNumber).innerHTML = namel_val;
+    document.getElementById("email" + rowNumber).innerHTML = email_val;
+    document.getElementById("phone" + rowNumber).innerHTML = phone_val;
 
-    document.getElementById("editButton" + id).style.display = "inline-block";
-    document.getElementById("saveButton" + id).style.display = "none";
+    document.getElementById("editButton" + rowNumber).style.display = "inline-block";
+    document.getElementById("saveButton" + rowNumber).style.display = "none";
 
-	let id_val = contactIds[id];
+	let id_val = contactIds[rowNumber];
 
 	let tmp = {firstName:namef_val, lastName:namel_val, Email:email_val, phone:phone_val, ID:id_val};
 
@@ -273,7 +278,6 @@ function addContact()
 	let email = document.getElementById("newContactEmailText").value;
 	let phone = document.getElementById("newContactPhoneText").value;
 
-	// Getting current date for dateCreated of contact
 	const date = new Date();
 	let day = date.getDate();
 	let month = date.getMonth() + 1; // date.getMonth returns month zero-indexed
