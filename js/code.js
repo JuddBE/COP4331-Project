@@ -192,7 +192,8 @@ function searchContacts()
                     text += "<td>" +
                         "<button class='btn btn-warning btn-sm' id='edit_button" + i + "'><span>Edit</span></button>" +
                         "<button class='btn btn-warning btn-sm' id='save_button" + i + "' value='Save' style='display: none'><span>Save</span></button>" +
-                        "<button class='btn btn-warning btn-sm'><span>Delete</span></button>" + "</td>";
+                        "<button class='btn btn-warning btn-sm'  onclick='deleteContact(" + i + ")'>" + "<span>Delete</span>" + "</button>" + "</td>";
+						
                     text += "<tr/>"
                 }
                 text += "</table>"
@@ -256,5 +257,39 @@ function addContact()
 	{
 		document.getElementById("contactAddResult").innerHTML = err.message;
 	}
-	
 }
+
+function deleteContact(rowNumber) {
+    let firstNameVal = document.getElementById("firstName" + rowNumber).innerText;
+    let lastNameVal = document.getElementById("lastName" + rowNumber).innerText;
+    
+	let name1 = firstNameVal.substring(0, firstNameVal.length);
+    let name2 = lastNameVal.substring(0, lastNameVal.length);
+	
+	let check = confirm('Are you sure you would like to delete contact: ' + name1 + ' ' + name2 + '?');
+    if (check === true) {
+        document.getElementById("row" + rowNumber + "").outerHTML = "";
+        
+		let tmp = {userId: userId, contactId: rowNumber};
+
+        let jsonPayload = JSON.stringify(tmp);
+
+        let url = urlBase + '/DeleteContact.' + extension;
+
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+        try {
+            xhr.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+
+                    console.log("Contact has been deleted");
+                }
+            };
+            xhr.send(jsonPayload);
+        } catch (err) {
+            console.log(err.message);
+		}
+    };
+}
+
