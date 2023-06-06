@@ -182,36 +182,22 @@ function searchContacts()
 			{
 				document.getElementById("contactSearchResult").innerHTML = "Contact(s) has been retrieved";
 				let jsonObject = JSON.parse( xhr.responseText );
-
+				
 				let text = "<table border='1'>"
                 for (let i = 0; i < jsonObject.results.length; i++) {
-					
-					contactIds[i] = jsonObject.results[i].ContactId;
-
                     text += "<tr id='row" + i + "'>"
                     text += "<td id='firstName" + i + "'><span>" + jsonObject.results[i].FirstName + "</span></td>";
                     text += "<td id='lastName" + i + "'><span>" + jsonObject.results[i].LastName + "</span></td>";
                     text += "<td id='email" + i + "'><span>" + jsonObject.results[i].Email + "</span></td>";
                     text += "<td id='phone" + i + "'><span>" + jsonObject.results[i].Phone + "</span></td>";
                     text += "<td>" +
-                        "<button class='btn btn-warning btn-sm' id='edit_button" + i + "'><span>Edit</span></button>" +
-                        "<button class='btn btn-warning btn-sm' id='save_button" + i + "' value='Save' style='display: none'><span>Save</span></button>" +
-                        "<button class='btn btn-warning btn-sm'  onclick='deleteContact(" + i + ")'>" + "<span>Delete</span>" + "</button>" + "</td>";
-						
+                        "<button class='btn btn-warning btn-sm' id='editButton" + i + "' onclick='editContact(" + i + ")'><span>Edit</span></button>" +
+                        "<button class='btn btn-warning btn-sm' id='saveButton" + i + "' value='Save' onclick='saveContact(" + i + ")' style='display: none'><span>Save</span></button>" +
+                        "<button class='btn btn-warning btn-sm'><span>Delete</span></button>" + "</td>";
                     text += "<tr/>"
                 }
                 text += "</table>"
 				document.getElementById("tbody").innerHTML = text;
-				// for( let i=0; i<jsonObject.results.length; i++ )
-				// {
-				// 	contactList += jsonObject.results[i].FirstName;
-				// 	if( i < jsonObject.results.length - 1 )
-				// 	{
-				// 		contactList += "<br />\r\n";
-				// 	}
-				// }
-				
-				// document.getElementsByTagName("p")[0].innerHTML = contactList;
 			}
 		};
 		xhr.send(jsonPayload);
@@ -220,6 +206,64 @@ function searchContacts()
 	{
 		document.getElementById("contactSearchResult").innerHTML = err.message;
 	}	
+}
+
+function editContact(id) {
+    document.getElementById("editButton" + id).style.display = "none";
+    document.getElementById("saveButton" + id).style.display = "inline-block";
+
+    var firstNameI = document.getElementById("firstName" + id);
+    var lastNameI = document.getElementById("lastName" + id);
+    var email = document.getElementById("email" + id);
+    var phone = document.getElementById("phone" + id);
+
+    var namef_data = firstNameI.innerText;
+    var namel_data = lastNameI.innerText;
+    var email_data = email.innerText;
+    var phone_data = phone.innerText;
+
+    firstNameI.innerHTML = "<input type='text' id='namef_text" + id + "' value='" + namef_data + "'>";
+    lastNameI.innerHTML = "<input type='text' id='namel_text" + id + "' value='" + namel_data + "'>";
+    email.innerHTML = "<input type='text' id='email_text" + id + "' value='" + email_data + "'>";
+    phone.innerHTML = "<input type='text' id='phone_text" + id + "' value='" + phone_data + "'>"
+}
+
+function saveContact(id) {
+    var namef_val = document.getElementById("namef_text" + id).value;
+    var namel_val = document.getElementById("namel_text" + id).value;
+    var email_val = document.getElementById("email_text" + id).value;
+    var phone_val = document.getElementById("phone_text" + id).value;
+
+    document.getElementById("firstName" + id).innerHTML = namef_val;
+    document.getElementById("lastName" + id).innerHTML = namel_val;
+    document.getElementById("email" + id).innerHTML = email_val;
+    document.getElementById("phone" + id).innerHTML = phone_val;
+
+    document.getElementById("editButton" + id).style.display = "inline-block";
+    document.getElementById("saveButton" + id).style.display = "none";
+
+	let id_val = contactIds[id];
+
+	let tmp = {firstName:namef_val, lastName:namel_val, Email:email_val, phone:phone_val, ID:id_val};
+
+    let jsonPayload = JSON.stringify(tmp);
+
+    let url = urlBase + '/UpdateContact.' + extension;
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+    try {
+        xhr.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                console.log("Contact has been updated");
+                searchContacts()
+            }
+        };
+        xhr.send(jsonPayload);
+    } catch (err) {
+        console.log(err.message);
+    }
 }
 
 function addContact()
