@@ -4,6 +4,7 @@ const extension = 'php';
 let userId = 0;
 let firstName = "";
 let lastName = "";
+const contactIds = [];
 
 function doLogin()
 {
@@ -181,9 +182,12 @@ function searchContacts()
 			{
 				document.getElementById("contactSearchResult").innerHTML = "Contact(s) has been retrieved";
 				let jsonObject = JSON.parse( xhr.responseText );
-				
+
 				let text = "<table border='1'>"
                 for (let i = 0; i < jsonObject.results.length; i++) {
+					
+					contactIds[i] = jsonObject.results[i].ContactId;
+
                     text += "<tr id='row" + i + "'>"
                     text += "<td id='firstName" + i + "'><span>" + jsonObject.results[i].FirstName + "</span></td>";
                     text += "<td id='lastName" + i + "'><span>" + jsonObject.results[i].LastName + "</span></td>";
@@ -259,7 +263,9 @@ function addContact()
 	}
 }
 
-function deleteContact(rowNumber) {
+function deleteContact(rowNumber) 
+{
+	let contactId = contactIds[rowNumber];
     let firstNameVal = document.getElementById("firstName" + rowNumber).innerText;
     let lastNameVal = document.getElementById("lastName" + rowNumber).innerText;
     
@@ -270,7 +276,7 @@ function deleteContact(rowNumber) {
     if (check === true) {
         document.getElementById("row" + rowNumber + "").outerHTML = "";
         
-		let tmp = {userId: userId, contactId: rowNumber};
+		let tmp = {userId: userId, contactId: contactId};
 
         let jsonPayload = JSON.stringify(tmp);
 
