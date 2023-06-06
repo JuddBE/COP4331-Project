@@ -67,6 +67,11 @@ function doSignup()
     let password = document.getElementById("password").value;
 
     // var hash = md5(password);
+
+	if (!signUpFormatCheck(firstName, lastName, username, password)) {
+        document.getElementById("signupResult").innerHTML = "invalid signup";
+        return;
+    }
 	
     document.getElementById("signupResult").innerHTML = "";
 
@@ -164,6 +169,7 @@ function searchContacts()
 	let srch = document.getElementById("searchText").value;
 	document.getElementById("contactSearchResult").innerHTML = "";
 	
+	// Create empty list to append search results to
 	let contactList = "";
 
 	let tmp = {userId:userId,search:srch};
@@ -182,36 +188,26 @@ function searchContacts()
 			{
 				document.getElementById("contactSearchResult").innerHTML = "Contact(s) has been retrieved";
 				let jsonObject = JSON.parse( xhr.responseText );
-
+				
 				let text = "<table border='1'>"
                 for (let i = 0; i < jsonObject.results.length; i++) {
-					
+					// Sve each contact id from search result into array for accessing in edit, save, and delete
 					contactIds[i] = jsonObject.results[i].ContactId;
 
+					// Dsiplay search results in contact table on page and create edit and delete buttons
                     text += "<tr id='row" + i + "'>"
                     text += "<td id='firstName" + i + "'><span>" + jsonObject.results[i].FirstName + "</span></td>";
                     text += "<td id='lastName" + i + "'><span>" + jsonObject.results[i].LastName + "</span></td>";
                     text += "<td id='email" + i + "'><span>" + jsonObject.results[i].Email + "</span></td>";
                     text += "<td id='phone" + i + "'><span>" + jsonObject.results[i].Phone + "</span></td>";
                     text += "<td>" +
-                        "<button class='btn btn-warning btn-sm' id='edit_button" + i + "'><span>Edit</span></button>" +
-                        "<button class='btn btn-warning btn-sm' id='save_button" + i + "' value='Save' style='display: none'><span>Save</span></button>" +
+                        "<button class='btn btn-warning btn-sm' id='editButton" + i + "' onclick='editContact(" + i + ")'><span>Edit</span></button>" +
+                        "<button class='btn btn-warning btn-sm' id='saveButton" + i + "' value='Save' onclick='saveContact(" + i + ")' style='display: none'><span>Save</span></button>" +
                         "<button class='btn btn-warning btn-sm'  onclick='deleteContact(" + i + ")'>" + "<span>Delete</span>" + "</button>" + "</td>";
-						
                     text += "<tr/>"
                 }
                 text += "</table>"
 				document.getElementById("tbody").innerHTML = text;
-				// for( let i=0; i<jsonObject.results.length; i++ )
-				// {
-				// 	contactList += jsonObject.results[i].FirstName;
-				// 	if( i < jsonObject.results.length - 1 )
-				// 	{
-				// 		contactList += "<br />\r\n";
-				// 	}
-				// }
-				
-				// document.getElementsByTagName("p")[0].innerHTML = contactList;
 			}
 		};
 		xhr.send(jsonPayload);
@@ -222,6 +218,64 @@ function searchContacts()
 	}	
 }
 
+function editContact(rowNumber) {
+    document.getElementById("editButton" + rowNumber).style.display = "none";
+    document.getElementById("saveButton" + rowNumber).style.display = "inline-block";
+
+    var firstNameI = document.getElementById("firstName" + rowNumber);
+    var lastNameI = document.getElementById("lastName" + rowNumber);
+    var email = document.getElementById("email" + rowNumber);
+    var phone = document.getElementById("phone" + rowNumber);
+
+    var namef_data = firstNameI.innerText;
+    var namel_data = lastNameI.innerText;
+    var email_data = email.innerText;
+    var phone_data = phone.innerText;
+
+    firstNameI.innerHTML = "<input type='text' id='namef_text" + rowNumber + "' value='" + namef_data + "'>";
+    lastNameI.innerHTML = "<input type='text' id='namel_text" + rowNumber + "' value='" + namel_data + "'>";
+    email.innerHTML = "<input type='text' id='email_text" + rowNumber + "' value='" + email_data + "'>";
+    phone.innerHTML = "<input type='text' id='phone_text" + rowNumber + "' value='" + phone_data + "'>"
+}
+
+function saveContact(rowNumber) {
+    var namef_val = document.getElementById("namef_text" + rowNumber).value;
+    var namel_val = document.getElementById("namel_text" + rowNumber).value;
+    var email_val = document.getElementById("email_text" + rowNumber).value;
+    var phone_val = document.getElementById("phone_text" + rowNumber).value;
+
+    document.getElementById("firstName" + rowNumber).innerHTML = namef_val;
+    document.getElementById("lastName" + rowNumber).innerHTML = namel_val;
+    document.getElementById("email" + rowNumber).innerHTML = email_val;
+    document.getElementById("phone" + rowNumber).innerHTML = phone_val;
+
+    document.getElementById("editButton" + rowNumber).style.display = "inline-block";
+    document.getElementById("saveButton" + rowNumber).style.display = "none";
+
+	let id_val = contactIds[rowNumber];
+
+	let tmp = {firstName:namef_val, lastName:namel_val, Email:email_val, phone:phone_val, ID:id_val};
+
+    let jsonPayload = JSON.stringify(tmp);
+
+    let url = urlBase + '/UpdateContact.' + extension;
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+    try {
+        xhr.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                console.log("Contact has been updated");
+                searchContacts()
+            }
+        };
+        xhr.send(jsonPayload);
+    } catch (err) {
+        console.log(err.message);
+    }
+}
+
 function addContact()
 {
 	let firstName = document.getElementById("newContactFirstNameText").value;
@@ -229,7 +283,10 @@ function addContact()
 	let email = document.getElementById("newContactEmailText").value;
 	let phone = document.getElementById("newContactPhoneText").value;
 
-	// Getting current date for dateCreated of contact
+	if (!contactFormatCheck(firstName, lastName, phone, email)) {
+		document.getElementById("contactAddResult").innerHTML = "Invalid formatting for one or more fields.";
+        return;
+    }
 	const date = new Date();
 	let day = date.getDate();
 	let month = date.getMonth() + 1; // date.getMonth returns month zero-indexed
@@ -297,5 +354,138 @@ function deleteContact(rowNumber)
             console.log(err.message);
 		}
     };
+}
+
+function signUpFormatCheck(firstname, lastname, username, password) {
+
+	let fnameFlag = true;
+	let lnameFlag = true;
+	let usernameFlag = true;
+	let passFlag = true;
+   
+    if (firstname == "") {
+        console.log("FIRST NAME IS BLANK");
+    }
+    else {
+        console.log("first name IS VALID");
+        fnameFlag = false;
+    }
+
+    if (lastname == "") {
+        console.log("LAST NAME IS BLANK");
+    }
+    else {
+        console.log("LAST name IS VALID");
+        lnameFlag = false;
+    }
+
+    if (username == "") {
+        console.log("USERNAME IS BLANK");
+    }
+    else {
+        var regex = /(?=.*[a-zA-Z])[a-zA-Z0-9-_](?=.*[!@#$%^&*]).{3,18}$/;
+		// atleast:
+		// 3 characters, 1 special character, and 1 number.
+
+        if (regex.test(username) == false) {
+            console.log("USERNAME IS NOT VALID");
+        }
+
+        else {
+
+            console.log("USERNAME IS VALID");
+            usernameFlag = false;
+        }
+    }
+
+    if (password == "") {
+        console.log("PASSWORD IS BLANK");
+    }
+    else {
+        var regex = /(?=.*\d)(?=.*[A-Z])(?=.*[A-Za-z])(?=.*[!@#$%^&*]).{8,32}/;
+		// Atleast: 
+		// 8 characters, 1 capital letter, 1 number, 1 special character. 
+
+        if (regex.test(password) == false) {
+            console.log("PASSWORD IS NOT VALID");
+        }
+
+        else {
+
+            console.log("PASSWORD IS VALID");
+            passFlag = false;
+        }
+    }
+
+    if ((fnameFlag || lnameFlag || usernameFlag || passFlag) == true) {
+        return false;
+
+    }
+
+    return true;
+}
+
+function contactFormatCheck(firstName, lastName, phone, email) {
+	let fnameFlag = true;
+	let lnameFlag = true;
+	let phoneFlag = true;
+	let emailFlag = true;
+
+    if (firstName == "") {
+        console.log("FIRST NAME IS BLANK");
+    }
+    else {
+        console.log("first name IS VALID");
+        fnameFlag = false;
+    }
+
+    if (lastName == "") {
+        console.log("LAST NAME IS BLANK");
+    }
+    else {
+        console.log("LAST name IS VALID");
+        lnameFlag = false;
+    }
+
+    if (phone == "") {
+        console.log("PHONE IS BLANK");
+    }
+    else {
+        var regex = /^[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4}$/;
+
+        if (regex.test(phone) == false) {
+            console.log("PHONE IS NOT VALID");
+        }
+
+        else {
+
+            console.log("PHONE IS VALID");
+            phoneFlag = false;
+        }
+    }
+
+    if (email == "") {
+        console.log("EMAIL IS BLANK");
+    }
+    else {
+        var regex = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
+
+        if (regex.test(email) == false) {
+            console.log("EMAIL IS NOT VALID");
+        }
+
+        else {
+
+            console.log("EMAIL IS VALID");
+            emailFlag = false;
+        }
+    }
+
+    if ((fnameFlag || lnameFlag || phoneFlag || emailFlag) == true) {
+        return false;
+
+    }
+
+    return true;
 }
 
