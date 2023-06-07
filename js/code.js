@@ -191,13 +191,10 @@ function searchContacts()
 				
 				let text = "<table border='1'>"
                 for (let i = 0; i < jsonObject.results.length; i++) {
-<<<<<<< HEAD
 					// Sve each contact id from search result into array for accessing in edit, save, and delete
 					contactIds[i] = jsonObject.results[i].ContactId;
 
 					// Dsiplay search results in contact table on page and create edit and delete buttons
-=======
->>>>>>> refs/remotes/origin/Adding-DeleteContact
                     text += "<tr id='row" + i + "'>"
                     text += "<td id='firstName" + i + "'><span>" + jsonObject.results[i].FirstName + "</span></td>";
                     text += "<td id='lastName" + i + "'><span>" + jsonObject.results[i].LastName + "</span></td>";
@@ -206,11 +203,7 @@ function searchContacts()
                     text += "<td>" +
                         "<button class='btn btn-warning btn-sm' id='editButton" + i + "' onclick='editContact(" + i + ")'><span>Edit</span></button>" +
                         "<button class='btn btn-warning btn-sm' id='saveButton" + i + "' value='Save' onclick='saveContact(" + i + ")' style='display: none'><span>Save</span></button>" +
-<<<<<<< HEAD
                         "<button class='btn btn-warning btn-sm'  onclick='deleteContact(" + i + ")'>" + "<span>Delete</span>" + "</button>" + "</td>";
-=======
-                        "<button class='btn btn-warning btn-sm'><span>Delete</span></button>" + "</td>";
->>>>>>> refs/remotes/origin/Adding-DeleteContact
                     text += "<tr/>"
                 }
                 text += "</table>"
@@ -225,7 +218,6 @@ function searchContacts()
 	}	
 }
 
-<<<<<<< HEAD
 function editContact(rowNumber) {
     document.getElementById("editButton" + rowNumber).style.display = "none";
     document.getElementById("saveButton" + rowNumber).style.display = "inline-block";
@@ -234,23 +226,12 @@ function editContact(rowNumber) {
     var lastNameI = document.getElementById("lastName" + rowNumber);
     var email = document.getElementById("email" + rowNumber);
     var phone = document.getElementById("phone" + rowNumber);
-=======
-function editContact(id) {
-    document.getElementById("editButton" + id).style.display = "none";
-    document.getElementById("saveButton" + id).style.display = "inline-block";
-
-    var firstNameI = document.getElementById("firstName" + id);
-    var lastNameI = document.getElementById("lastName" + id);
-    var email = document.getElementById("email" + id);
-    var phone = document.getElementById("phone" + id);
->>>>>>> refs/remotes/origin/Adding-DeleteContact
 
     var namef_data = firstNameI.innerText;
     var namel_data = lastNameI.innerText;
     var email_data = email.innerText;
     var phone_data = phone.innerText;
 
-<<<<<<< HEAD
     firstNameI.innerHTML = "<input type='text' id='namef_text" + rowNumber + "' value='" + namef_data + "'>";
     lastNameI.innerHTML = "<input type='text' id='namel_text" + rowNumber + "' value='" + namel_data + "'>";
     email.innerHTML = "<input type='text' id='email_text" + rowNumber + "' value='" + email_data + "'>";
@@ -272,29 +253,6 @@ function saveContact(rowNumber) {
     document.getElementById("saveButton" + rowNumber).style.display = "none";
 
 	let id_val = contactIds[rowNumber];
-=======
-    firstNameI.innerHTML = "<input type='text' id='namef_text" + id + "' value='" + namef_data + "'>";
-    lastNameI.innerHTML = "<input type='text' id='namel_text" + id + "' value='" + namel_data + "'>";
-    email.innerHTML = "<input type='text' id='email_text" + id + "' value='" + email_data + "'>";
-    phone.innerHTML = "<input type='text' id='phone_text" + id + "' value='" + phone_data + "'>"
-}
-
-function saveContact(id) {
-    var namef_val = document.getElementById("namef_text" + id).value;
-    var namel_val = document.getElementById("namel_text" + id).value;
-    var email_val = document.getElementById("email_text" + id).value;
-    var phone_val = document.getElementById("phone_text" + id).value;
-
-    document.getElementById("firstName" + id).innerHTML = namef_val;
-    document.getElementById("lastName" + id).innerHTML = namel_val;
-    document.getElementById("email" + id).innerHTML = email_val;
-    document.getElementById("phone" + id).innerHTML = phone_val;
-
-    document.getElementById("editButton" + id).style.display = "inline-block";
-    document.getElementById("saveButton" + id).style.display = "none";
-
-	let id_val = contactIds[id];
->>>>>>> refs/remotes/origin/Adding-DeleteContact
 
 	let tmp = {firstName:namef_val, lastName:namel_val, Email:email_val, phone:phone_val, ID:id_val};
 
@@ -398,3 +356,135 @@ function deleteContact(rowNumber)
     };
 }
 
+function signUpFormatCheck(firstname, lastname, username, password) {
+
+	let fnameFlag = true;
+	let lnameFlag = true;
+	let usernameFlag = true;
+	let passFlag = true;
+   
+    if (firstname == "") {
+        console.log("FIRST NAME IS BLANK");
+    }
+    else {
+        console.log("first name IS VALID");
+        fnameFlag = false;
+    }
+
+    if (lastname == "") {
+        console.log("LAST NAME IS BLANK");
+    }
+    else {
+        console.log("LAST name IS VALID");
+        lnameFlag = false;
+    }
+
+    if (username == "") {
+        console.log("USERNAME IS BLANK");
+    }
+    else {
+        var regex = /(?=.*[a-zA-Z])[a-zA-Z0-9-_](?=.*[!@#$%^&*]).{3,18}$/;
+		// atleast:
+		// 3 characters, 1 special character, and 1 number.
+
+        if (regex.test(username) == false) {
+            console.log("USERNAME IS NOT VALID");
+        }
+
+        else {
+
+            console.log("USERNAME IS VALID");
+            usernameFlag = false;
+        }
+    }
+
+    if (password == "") {
+        console.log("PASSWORD IS BLANK");
+    }
+    else {
+        var regex = /(?=.*\d)(?=.*[A-Z])(?=.*[A-Za-z])(?=.*[!@#$%^&*]).{8,32}/;
+		// Atleast: 
+		// 8 characters, 1 capital letter, 1 number, 1 special character. 
+
+        if (regex.test(password) == false) {
+            console.log("PASSWORD IS NOT VALID");
+        }
+
+        else {
+
+            console.log("PASSWORD IS VALID");
+            passFlag = false;
+        }
+    }
+
+    if ((fnameFlag || lnameFlag || usernameFlag || passFlag) == true) {
+        return false;
+
+    }
+
+    return true;
+}
+
+function contactFormatCheck(firstName, lastName, phone, email) {
+	let fnameFlag = true;
+	let lnameFlag = true;
+	let phoneFlag = true;
+	let emailFlag = true;
+
+    if (firstName == "") {
+        console.log("FIRST NAME IS BLANK");
+    }
+    else {
+        console.log("first name IS VALID");
+        fnameFlag = false;
+    }
+
+    if (lastName == "") {
+        console.log("LAST NAME IS BLANK");
+    }
+    else {
+        console.log("LAST name IS VALID");
+        lnameFlag = false;
+    }
+
+    if (phone == "") {
+        console.log("PHONE IS BLANK");
+    }
+    else {
+        var regex = /^[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4}$/;
+
+        if (regex.test(phone) == false) {
+            console.log("PHONE IS NOT VALID");
+        }
+
+        else {
+
+            console.log("PHONE IS VALID");
+            phoneFlag = false;
+        }
+    }
+
+    if (email == "") {
+        console.log("EMAIL IS BLANK");
+    }
+    else {
+        var regex = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
+
+        if (regex.test(email) == false) {
+            console.log("EMAIL IS NOT VALID");
+        }
+
+        else {
+
+            console.log("EMAIL IS VALID");
+            emailFlag = false;
+        }
+    }
+
+    if ((fnameFlag || lnameFlag || phoneFlag || emailFlag) == true) {
+        return false;
+
+    }
+
+    return true;
+}
