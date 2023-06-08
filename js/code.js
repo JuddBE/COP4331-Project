@@ -383,9 +383,10 @@ function signUpFormatCheck(firstname, lastname, username, password) {
         console.log("USERNAME IS BLANK");
     }
     else {
-        var regex = /(?=.*[a-zA-Z])[a-zA-Z0-9-_](?=.*[!@#$%^&*]).{3,18}$/;
+        //var regex = /(?=.*[a-zA-Z])[a-zA-Z0-9-_](?=.*[!@#$%^&*]).{3,18}$/;
+        var regex = /(?=.*[a-zA-Z])[a-zA-Z0-9-_]{3,18}$/;
 		// atleast:
-		// 3 characters, 1 special character, and 1 number.
+		// 3 characters, max of 18, no special characters
 
         if (regex.test(username) == false) {
             console.log("USERNAME IS NOT VALID");
@@ -597,4 +598,5 @@ addEventListener("DOMContentLoaded", (event) => {
         passwordAlert.classList.add("d-none");
     });
 });
+
 
