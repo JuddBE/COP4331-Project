@@ -102,14 +102,16 @@ table {
     float: left;
 }
 
-.wrong .fa-check
+.wrong .fa-check::before
 {
-    display: none;
+    color: rgb(240, 50, 50);
+    content: "-";
 }
 
-.good .fa-times
+.good .fa-times::after
 {
-    display: none; 
+    color: rgb(8, 158, 8);
+    content: "+";
 }
 .valid-feedback,
 .invalid-feedback {
