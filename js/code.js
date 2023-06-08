@@ -287,6 +287,7 @@ function addContact()
 		document.getElementById("contactAddResult").innerHTML = "Invalid formatting for one or more fields.";
         return;
     }
+  
 	const date = new Date();
 	let day = date.getDate();
 	let month = date.getMonth() + 1; // date.getMonth returns month zero-indexed
@@ -490,6 +491,7 @@ function contactFormatCheck(firstName, lastName, phone, email) {
     return true;
 }
 
+
 addEventListener("DOMContentLoaded", (event) => {
     const password = document.getElementById("password");
     const passwordAlert = document.getElementById("password-alert");
@@ -598,5 +600,4 @@ addEventListener("DOMContentLoaded", (event) => {
         passwordAlert.classList.add("d-none");
     });
 });
-
 
