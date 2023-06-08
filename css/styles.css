@@ -4,6 +4,11 @@
     background-attachment: fixed;
 } 
 
+/* .title {
+    font-size: x-large;
+
+} */
+
 .tables {
     align-self: center;
 }
@@ -71,12 +76,18 @@ table {
     border: 2px solid #010000;
 }
 
+.home-form {
+    margin-bottom: 150px;
+    padding-bottom: 150px;
+}
+
 .form-container {
     border: 1px solid #010000;
+    border-radius: 14px;
     background: blanchedalmond;
     background-size: cover;
-    padding: 10% 12%;
-    margin-top: 5%;
+    padding: 30px 24px;
+    margin-top: 20px;
     box-shadow: -1px 4px 26px 11px rgba(0, 0, 0, 0.35);
 }
 
@@ -102,3 +113,18 @@ table {
     float: left;
 }
  
+.wrong .fa-check::before
+{
+    color: rgb(240, 50, 50);
+    content: "-";
+}
+
+.good .fa-times::after
+{
+    color: rgb(8, 158, 8);
+    content: "+";
+}
+.valid-feedback,
+.invalid-feedback {
+  margin-left: calc(2em + 0.25rem + 1.5rem);
+}

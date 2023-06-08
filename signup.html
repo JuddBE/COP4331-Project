@@ -23,9 +23,9 @@
             </li>
           </ul>
 		<div class="row">
-			<div class="col-md-4 col-sm-4 col-xs-12"></div>
-			<div class="col-md-4 col-sm-4 col-xs-12">
-			<!--form starts here-->
+			<div class="col-4"></div>
+			<div class="col-lg-4">
+				<div class="container-fluid form-container">
                     <div class="row mb-3">
 					  <label for="firstName">First name</label>
 					  <div class="col-sm-12">
@@ -50,6 +50,8 @@
 					  <label for="password">Password </label>
 					  <div class="col-sm-12">
 						<input type="password" class="form-control" id="password" required/>
+						<div class="valid-feedback">Good</div>
+						<div class="invalid-feedback">Wrong</div>
 					  </div>
 					</div>
 					<div class="row mb-3">
@@ -66,9 +68,35 @@
                         <button class="btn btn-success" type="submit" onclick="doSignup()">Submit</button>
                         <span class="text" id="signupResult"></span>
                     </div>
-                  <!--form ends here-->
+				</div>
+				<div 
+				class="alert px-4 py-3 mb-0 d-none" 
+				role="alert"
+				data-mdb-color="warning"
+				id="password-alert"
+				>
+				<ul class="list-unstyled mb-0">
+				  <li class="requirements leng">
+					<i class="fas fa-check text-success me-2"></i>
+					<i class="fas fa-times text-danger me-3"></i>
+					Your password must have at least 8 chars</li>
+				  <li class="requirements big-letter">
+					<i class="fas fa-check text-success me-2"></i>
+					<i class="fas fa-times text-danger me-3"></i>
+					Your password must have at least 1 Capital letter.</li>
+				  <li class="requirements num">
+					<i class="fas fa-check text-success me-2"></i>
+					<i class="fas fa-times text-danger me-3"></i>
+					Your password must have at least 1 number.</li>
+				  <li class="requirements special-char">
+					<i class="fas fa-check text-success me-2"></i>
+					<i class="fas fa-times text-danger me-3"></i>
+					Your password must have at least 1 special char.</li>
+				</ul>
+			  </div>
+		  
 			</div>
-			<div class="col-md-4-col col-sm-4 col-xs-12"></div>
+			<div class="col-4"></div>
 		</div>
 	</div>
 	<script src="node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
