@@ -14,11 +14,11 @@ function doLogin()
 	
 	let login = document.getElementById("loginName").value;
 	let password = document.getElementById("loginPassword").value;
-    // var hash = md5( password );
+    var hash = md5( password );
 
 	document.getElementById("loginResult").innerHTML = "";
 
-	var tmp = {login:login,password:password};
+	var tmp = {login:login,password:hash};
 	let jsonPayload = JSON.stringify( tmp );
 	
 	let url = urlBase + '/Login.' + extension;
@@ -66,7 +66,7 @@ function doSignup()
     let username = document.getElementById("userName").value;
     let password = document.getElementById("password").value;
 
-    // var hash = md5(password);
+    var hash = md5(password);
 
 	if (!signUpFormatCheck(firstName, lastName, username, password)) {
         document.getElementById("signupResult").innerHTML = "invalid signup";
@@ -75,7 +75,7 @@ function doSignup()
 	
     document.getElementById("signupResult").innerHTML = "";
 
-    let tmp = {firstName:firstName,lastName:lastName,login:username,password:password};
+    let tmp = {firstName:firstName,lastName:lastName,login:username,password:hash};
 
     let jsonPayload = JSON.stringify(tmp);
 
@@ -287,7 +287,6 @@ function addContact()
 		document.getElementById("contactAddResult").innerHTML = "Invalid formatting for one or more fields.";
         return;
     }
-  
 	const date = new Date();
 	let day = date.getDate();
 	let month = date.getMonth() + 1; // date.getMonth returns month zero-indexed
@@ -491,7 +490,6 @@ function contactFormatCheck(firstName, lastName, phone, email) {
     return true;
 }
 
-
 addEventListener("DOMContentLoaded", (event) => {
     const password = document.getElementById("password");
     const passwordAlert = document.getElementById("password-alert");
@@ -600,4 +598,5 @@ addEventListener("DOMContentLoaded", (event) => {
         passwordAlert.classList.add("d-none");
     });
 });
+
 
