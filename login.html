@@ -19,21 +19,24 @@
               <button class="btn" onclick="location.href = 'index.html'">Home</button>
             </li>
             <li class="nav-item">
-              <button class="btn" onclick="location.href = 'signup.html'">Sign-up</button>
+              <button class="btn" onclick="location.href = 'signup.html'">Sign up</button>
             </li>
           </ul>
 		<div class="row">
 			<div class="col-4"></div>
-			<div class="col-md-4">
+			<div class="col-md-4 col-sm-6 col-xs-8">
 			<!--form starts here-->
 				<div class="container-fluid form-container">
-					<div class="row mb-3">
+					<div class="row justify-content-center align-items-center">
+						<h4 class="text-center">Login</h4>
+					</div>
+					<div class="row mb-3 input-format">
 						<label for="loginName">Username</label>
 						<div class="col-sm-12">
 						  <input type="text" class="form-control" id="loginName" required/>
 						</div>
 					  </div>
-					  <div class="row mb-3">
+					  <div class="row mb-3 input-format">
 						<label for="loginPassword">Password</label>
 						<div class="col-sm-12">
 						  <input type="password" class="form-control" id="loginPassword" required />
@@ -41,24 +44,12 @@
 							  pattern="(?=.*\d)(?=.*[A-Za-z])(?=.*[!@#$%^&*]).{8,32}" -->
 						</div>
 					  </div>
-			  
-					  <div class="row mb-3">
-						<div class="col-sm-10">
-						  <div class="form-check">
-							<input class="form-check-input" type="checkbox" id="gridCheck1"/>
-							<label class="form-check-label" for="gridCheck1">
-							  Remember me
-							</label>
-						  </div>
-						</div>
-					  </div>
-					  <div class="d-grid mx-auto">
-						  <button class="btn btn-success" type="submit" onclick="doLogin()">Submit</button>
+					  <div class="d-grid mx-auto input-format">
+						  <button class="btn btn-warning" type="submit" onclick="doLogin()">Submit</button>
 						  <span class="text" id="loginResult"></span>
 					  </div>
 				</div>
-					
-				  <!-- </form> -->
+				<!-- </form> -->
 			</div>
 			<div class="col-4"></div>
 		</div>

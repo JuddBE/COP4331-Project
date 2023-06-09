@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Signup</title>
+	<title>Sign up</title>
 	<script type="text/javascript" src="js/md5.js"></script>
 	<script type="text/javascript" src="js/code.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -22,31 +22,34 @@
                 <button class ="btn" onclick="location.href = 'login.html'">Login</button>
             </li>
           </ul>
-		<div class="row">
+		<div class="row align-items-center">
 			<div class="col-4"></div>
-			<div class="col-lg-4">
+			<div class="col-md-4 col-sm-6 col-xs-8">
 				<div class="container-fluid form-container">
-                    <div class="row mb-3">
+					<div class="row justify-content-center align-items-center">
+						<h4 class="text-center">Sign up</h4>
+					</div>
+                    <div class="row mb-3 input-format">
 					  <label for="firstName">First name</label>
 					  <div class="col-sm-12">
 						<input type="firstName" class="form-control" id="firstName" required
                         autocomplete="on"/>
 					  </div>
 					</div>
-                    <div class="row mb-3">
+                    <div class="row mb-3 input-format">
                         <label for="lastName">Last name</label>
                         <div class="col-sm-12">
                           <input type="lastName" class="form-control" id="lastName" required
                           autocomplete="on"/>
                         </div>
                     </div>
-					<div class="row mb-3">
+					<div class="row mb-3 input-format">
 					  <label for="userName">Username </label>
 					  <div class="col-sm-12">
 						<input type="userName" class="form-control" id="userName" required/>
 					  </div>
 					</div>
-					<div class="row mb-3">
+					<div class="row mb-3 input-format">
 					  <label for="password">Password </label>
 					  <div class="col-sm-12">
 						<input type="password" class="form-control" id="password" required/>
@@ -54,28 +57,20 @@
 						<div class="invalid-feedback">Wrong</div>
 					  </div>
 					</div>
-					<div class="row mb-3">
-					  <div class="col-sm-12">
-						<div class="form-check">
-						  <input class="form-check-input" type="checkbox" id="gridCheck1"/>
-						  <label class="form-check-label" for="gridCheck1">
-							Remember me
-						  </label>
-						</div>
-					  </div>
-					</div>
-                    <div class="d-grid">
-                        <button class="btn btn-success" type="submit" onclick="doSignup()">Submit</button>
+                    <div class="d-grid input-format">
+                        <button class="btn btn-warning" type="submit" onclick="doSignup()">Submit</button>
                         <span class="text" id="signupResult"></span>
                     </div>
 				</div>
+			</div>
+			<div class="col-4 align-items-center">
 				<div 
-				class="alert px-4 py-3 mb-0 d-none" 
+				class="alert px-4 py-3 mb-0 d-none form-container" 
 				role="alert"
 				data-mdb-color="warning"
 				id="password-alert"
 				>
-				<ul class="list-unstyled mb-0">
+				<ul class="list-unstyled mb-0 fs-8">
 				  <li class="requirements leng">
 					<i class="fas fa-check text-success me-2"></i>
 					<i class="fas fa-times text-danger me-3"></i>
@@ -94,9 +89,7 @@
 					Your password must have at least 1 special char.</li>
 				</ul>
 			  </div>
-		  
 			</div>
-			<div class="col-4"></div>
 		</div>
 	</div>
 	<script src="node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
