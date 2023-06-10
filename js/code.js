@@ -14,11 +14,11 @@ function doLogin()
 	
 	let login = document.getElementById("loginName").value;
 	let password = document.getElementById("loginPassword").value;
-    // var hash = md5( password );
+    var hash = md5( password );
 
 	document.getElementById("loginResult").innerHTML = "";
 
-	var tmp = {login:login,password:password};
+	var tmp = {login:login,password:hash};
 	let jsonPayload = JSON.stringify( tmp );
 	
 	let url = urlBase + '/Login.' + extension;
@@ -46,7 +46,7 @@ function doLogin()
 
 				saveCookie();
 	
-				window.location.href = "color.html";
+				window.location.href = "contacts.html";
 			}
 		};
 		xhr.send(jsonPayload);
@@ -66,7 +66,7 @@ function doSignup()
     let username = document.getElementById("userName").value;
     let password = document.getElementById("password").value;
 
-    // var hash = md5(password);
+    var hash = md5(password);
 
 	if (!signUpFormatCheck(firstName, lastName, username, password)) {
         document.getElementById("signupResult").innerHTML = "invalid signup";
@@ -75,7 +75,7 @@ function doSignup()
 	
     document.getElementById("signupResult").innerHTML = "";
 
-    let tmp = {firstName:firstName,lastName:lastName,login:username,password:password};
+    let tmp = {firstName:firstName,lastName:lastName,login:username,password:hash};
 
     let jsonPayload = JSON.stringify(tmp);
 
@@ -232,10 +232,10 @@ function editContact(rowNumber) {
     var email_data = email.innerText;
     var phone_data = phone.innerText;
 
-    firstNameI.innerHTML = "<input type='text' id='namef_text" + rowNumber + "' value='" + namef_data + "'>";
-    lastNameI.innerHTML = "<input type='text' id='namel_text" + rowNumber + "' value='" + namel_data + "'>";
-    email.innerHTML = "<input type='text' id='email_text" + rowNumber + "' value='" + email_data + "'>";
-    phone.innerHTML = "<input type='text' id='phone_text" + rowNumber + "' value='" + phone_data + "'>"
+    firstNameI.innerHTML = "<input class='form-control text-center' type='text' id='namef_text" + rowNumber + "' value='" + namef_data + "'>";
+    lastNameI.innerHTML = "<input class='form-control text-center' type='text' id='namel_text" + rowNumber + "' value='" + namel_data + "'>";
+    email.innerHTML = "<input class='form-control text-center' type='text' id='email_text" + rowNumber + "' value='" + email_data + "'>";
+    phone.innerHTML = "<input class='form-control text-center' type='text' id='phone_text" + rowNumber + "' value='" + phone_data + "'>"
 }
 
 function saveContact(rowNumber) {
@@ -287,7 +287,6 @@ function addContact()
 		document.getElementById("contactAddResult").innerHTML = "Invalid formatting for one or more fields.";
         return;
     }
-  
 	const date = new Date();
 	let day = date.getDate();
 	let month = date.getMonth() + 1; // date.getMonth returns month zero-indexed
@@ -319,6 +318,7 @@ function addContact()
 	{
 		document.getElementById("contactAddResult").innerHTML = err.message;
 	}
+    searchContacts();
 }
 
 function deleteContact(rowNumber) 
@@ -491,7 +491,6 @@ function contactFormatCheck(firstName, lastName, phone, email) {
     return true;
 }
 
-
 addEventListener("DOMContentLoaded", (event) => {
     const password = document.getElementById("password");
     const passwordAlert = document.getElementById("password-alert");
@@ -600,4 +599,25 @@ addEventListener("DOMContentLoaded", (event) => {
         passwordAlert.classList.add("d-none");
     });
 });
+
+function changeBackground(){
+    console.log(document.body.style.background);
+    if(document.body.style.background == 'url("../images/sunset.jpg") 0% 0% / cover no-repeat fixed'){
+        document.body.style.background = 'url("../images/night.jpg") 0% 0% / cover no-repeat fixed';
+    }
+    else{
+        document.body.style.background = 'url("../images/sunset.jpg") 0% 0% / cover no-repeat fixed';
+    }
+    // document.body.style.width = "100%";
+    // document.body.style.height = "100vh";
+    // document.body.style.backgroundSize = "cover";
+    // document.body.style.backgroundAttachment = "fixed";
+    if(document.getElementById("logo").src == "http://cop4331-18.online/images/sunset.png"){
+        document.getElementById("logo").src = "../images/night_logo.png";
+    }
+    else{
+        document.getElementById("logo").src = "../images/sunset.png";
+    }
+    
+}
 

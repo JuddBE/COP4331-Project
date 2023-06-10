@@ -11,25 +11,37 @@
 	<link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
 </head>
-<body>
-	<div class="container-fluid background d-flex align-items-center justify-content-center">
-		<div class="col-md-4">
-			<div class="container d-flex justify-content-center form-container home-form">
-				<!-- <div class="row mb-3">
-					<div class="col d-flex justify-content-center">
-						<h2 class="title">Cityscape Contacts</h2>
-					</div>
-				</div> -->
-				<div class="row mb-3">
-					<div class="col d-flex justify-content-end">
-						<button class="btn btn-lg text-center btn-warning" onclick="location.href = 'login.html'">Login</button>
-					</div>
-					<div class="col d-flex justify-content-start">
-						<button class="btn btn-lg text-center btn-warning" onclick="location.href = 'signup.html'">Signup</button>
+<body style="background:url('../images/sunset.jpg') no-repeat; background-size:cover; background-attachment:fixed;">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="container-fluid title d-flex justify-content-center">
+				<img src="/images/sunset.png" width="470" height="329" id="logo" onclick="changeBackground()">
+			</div>
+		</div>
+		<div class="row">
+			<div class="container-fluid d-flex justify-content-center">
+				<div class="col-lg-3 col-md-7">
+					<div class="container d-flex justify-content-center form-container home-form">
+						<div class="row input-format">
+							<div class="col justify-content-center">
+								<button class="btn btn-lg text-center btn-warning" onclick="location.href = 'login.html'">Login</button>
+							</div>
+						</div>
+						<div class="row input-format">
+							<div class="col justify-content-center">
+								<button class="btn btn-lg text-center btn-warning" onclick="location.href = 'signup.html'">Sign up</button>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+		<div class="row">
+			<div class="container-fluid d-flex justify-content-center align-items-bottom">
+				<a class="link-text" href="https://github.com/JuddBE/COP4331-Project">Take a look beyond the horizon</a>
+			</div>
+		</div>
+		
 		
 		<script src="node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
 	</div>
