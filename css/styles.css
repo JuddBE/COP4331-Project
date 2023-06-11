@@ -1,13 +1,52 @@
-.background {
-    background: url('../images/newyork.jpg') no-repeat; width: 100%; height: 100vh;
+body {
+    background: url('../images/sunset.jpg') no-repeat; width: 100%; height: 100vh;
     background-size: cover;
     background-attachment: fixed;
-} 
+}
 
-/* .title {
-    font-size: x-large;
+.title {
+    padding-top: 6%;
+}
 
-} */
+.link-text {
+    color: rgb(251,251,223,0.9);
+    font-size: 40px;
+    font-weight: bold;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: rgb(34, 34, 34, 0.8);
+}
+
+.title-text {
+    font-size: 70px;
+    color: #ffc107;
+    font-weight: bold;
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: rgb(34, 34, 34);
+}
+
+.subtitle-text {
+    font-size: 40px;
+    color: #ffc107;
+    font-weight: bold;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: rgb(34, 34, 34);
+}
+
+.input-format {
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.add-contact-row {
+    padding-left: 7%;
+    padding-right: 7%;
+    padding-bottom: 20px;
+}
+
+.add-button {
+    padding-left: 30%;
+    padding-right: 30%;
+}
 
 .tables {
     align-self: center;
@@ -24,26 +63,24 @@ table {
 #contacts th {
     padding: 15px 12px;
     text-align: center;
-    font-family: 'Montserrat';
     font-weight: 500;
     font-size: 16px;
     font-weight: bold;
-    color: #060505;
-    background-color: blanchedalmond;
+    color: rgb(34, 34, 34);
+    background-color: rgb(251,251,223);
 }
 
 #contacts td {
     padding: 6px;
     text-align: center;
-    font-family: 'Montserrat';
-    border: 1px solid #060505;
+    border: 1px solid rgb(34, 34, 34);
     vertical-align: middle;
     font-weight: 500;
     font-size: 16px;
     font-weight: bold;
     word-wrap: break-word;
-    color: #060505;
-    background-color: blanchedalmond;
+    color: rgb(34, 34, 34);
+    background-color: rgb(251,251,223);
 }
 
 #contacts td span {
@@ -55,40 +92,57 @@ table {
     padding-top: 10px;
     padding-bottom: 10px;
     align-self: center;
-    display: none;
 }
 
 .title-container {
     padding-top: 0.5%;
     padding-bottom: 1%;
-    background: coral;
     background-size: cover;
     background-attachment: fixed;
 }
 
+.btn-format {
+    background: rgb(255, 96, 0);
+    background-color: rgb(255, 96, 0);
+    color: rgb(34, 34, 34);
+    border: 1px rgb(34, 34, 34);
+}
+
 .rows-container {
-    background: blanchedalmond;
+    background: rgb(251,251,223);
     background-attachment: fixed;
-    border: 0px #010000;
+    border: 0px rgb(34, 34, 34);
 }
 
 .contacts-container {
-    border: 2px solid #010000;
+    border: 2px solid rgb(34, 34, 34);
 }
 
 .home-form {
     margin-bottom: 150px;
-    padding-bottom: 150px;
 }
 
 .form-container {
-    border: 1px solid #010000;
+    border: 1px solid rgb(34, 34, 34);
     border-radius: 14px;
-    background: blanchedalmond;
+    background: rgb(251,251,223, 0.8);
     background-size: cover;
-    padding: 30px 24px;
+    padding: 24px;
     margin-top: 20px;
-    box-shadow: -1px 4px 26px 11px rgba(0, 0, 0, 0.35);
+    margin-left: 10px;
+    margin-right: 10px;
+    /* box-shadow: -1px 4px 26px 11px rgba(0, 0, 0, 0.35); */
+}
+
+.full-table-container {
+    border: 1px solid rgb(34, 34, 34, 0);
+    background: rgb(255, 235, 205, 0);
+    background-size: cover;
+    min-height: 76vh;
+    padding: 10px 16px;
+    margin-top: 0px;
+    display: flex;
+    flex-direction: column;
 }
 
 .contact {
@@ -99,12 +153,13 @@ table {
 }
 
 .btn {
-    color: #00102A;
+    color: rgb(34, 34, 34);
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: bolder;
     font-size: 20px;
-    background: blanchedalmond;
+    background: rgb(255, 96, 0);
+    background-color: rgb(255, 96, 0);
     background-size: cover;
     border: 0px;
     cursor: pointer;
