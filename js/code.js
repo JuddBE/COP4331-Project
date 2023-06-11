@@ -46,7 +46,7 @@ function doLogin()
 
 				saveCookie();
 	
-				window.location.href = "color.html";
+				window.location.href = "contacts.html";
 			}
 		};
 		xhr.send(jsonPayload);
@@ -232,10 +232,10 @@ function editContact(rowNumber) {
     var email_data = email.innerText;
     var phone_data = phone.innerText;
 
-    firstNameI.innerHTML = "<input type='text' id='namef_text" + rowNumber + "' value='" + namef_data + "'>";
-    lastNameI.innerHTML = "<input type='text' id='namel_text" + rowNumber + "' value='" + namel_data + "'>";
-    email.innerHTML = "<input type='text' id='email_text" + rowNumber + "' value='" + email_data + "'>";
-    phone.innerHTML = "<input type='text' id='phone_text" + rowNumber + "' value='" + phone_data + "'>"
+    firstNameI.innerHTML = "<input class='form-control text-center' type='text' id='namef_text" + rowNumber + "' value='" + namef_data + "'>";
+    lastNameI.innerHTML = "<input class='form-control text-center' type='text' id='namel_text" + rowNumber + "' value='" + namel_data + "'>";
+    email.innerHTML = "<input class='form-control text-center' type='text' id='email_text" + rowNumber + "' value='" + email_data + "'>";
+    phone.innerHTML = "<input class='form-control text-center' type='text' id='phone_text" + rowNumber + "' value='" + phone_data + "'>"
 }
 
 function saveContact(rowNumber) {
@@ -318,6 +318,7 @@ function addContact()
 	{
 		document.getElementById("contactAddResult").innerHTML = err.message;
 	}
+    searchContacts();
 }
 
 function deleteContact(rowNumber) 
@@ -599,4 +600,81 @@ addEventListener("DOMContentLoaded", (event) => {
     });
 });
 
+/* Code for Username validation on Signup Page*/
+addEventListener("DOMContentLoaded", (event) => {
+    const userName = document.getElementById("userName");
+    const userNameAlert = document.getElementById("userName-alert");
+    const requirements = document.querySelectorAll(".requirements");
+    let lengBoolean;
+    let leng = document.querySelector(".leng");
+    
+    requirements.forEach((element) => element.classList.add("wrong"));
 
+    userName.addEventListener("focus", () => {
+        userNameAlert.classList.remove("d-none");
+        if (!userName.classList.contains("is-valid")) {
+            userName.classList.add("is-invalid");
+        }
+    });
+
+    userName.addEventListener("input", () => {
+        let value = userName.value;
+        if (value.length < 3) {
+            lengBoolean = false;
+        } else if (value.length > 2) {
+            lengBoolean = true;
+        }
+
+        if (lengBoolean == true) {
+            userName.classList.remove("is-invalid");
+            userName.classList.add("is-valid");
+
+            requirements.forEach((element) => {
+                element.classList.remove("wrong");
+                element.classList.add("good");
+            });
+            userNameAlert.classList.remove("alert-warning");
+            userNameAlert.classList.add("alert-success");
+        } else {
+            userName.classList.remove("is-valid");
+            userName.classList.add("is-invalid");
+
+            userNameAlert.classList.add("alert-warning");
+            userNameAlert.classList.remove("alert-success");
+
+            if (lengBoolean == false) {
+                leng.classList.add("wrong");
+                leng.classList.remove("good");
+            } else {
+                leng.classList.add("good");
+                leng.classList.remove("wrong");
+            }
+        }
+    });
+
+    userName.addEventListener("blur", () => {
+        userNameAlert.classList.add("d-none");
+    });
+});
+
+
+function changeBackground(){
+    console.log(document.body.style.background);
+    if(document.body.style.background == 'url("../images/sunset.jpg") 0% 0% / cover no-repeat fixed'){
+        document.body.style.background = 'url("../images/night.jpg") 0% 0% / cover no-repeat fixed';
+    }
+    else{
+        document.body.style.background = 'url("../images/sunset.jpg") 0% 0% / cover no-repeat fixed';
+    }
+    // document.body.style.width = "100%";
+    // document.body.style.height = "100vh";
+    // document.body.style.backgroundSize = "cover";
+    // document.body.style.backgroundAttachment = "fixed";
+    if(document.getElementById("logo").src == "http://cop4331-18.online/images/sunset.png"){
+        document.getElementById("logo").src = "../images/night_logo.png";
+    }
+    else{
+        document.getElementById("logo").src = "../images/sunset.png";
+    }
+    
+}
