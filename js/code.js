@@ -184,16 +184,15 @@ function searchContacts()
 	{
 		xhr.onreadystatechange = function() 
 		{
+            let text = "<table border='1'>";
 			if (this.readyState == 4 && this.status == 200) 
 			{
 				document.getElementById("contactSearchResult").innerHTML = "Contact(s) has been retrieved";
 				let jsonObject = JSON.parse( xhr.responseText );
 				
-				let text = "<table border='1'>"
                 for (let i = 0; i < jsonObject.results.length; i++) {
 					// Sve each contact id from search result into array for accessing in edit, save, and delete
 					contactIds[i] = jsonObject.results[i].ContactId;
-
 					// Dsiplay search results in contact table on page and create edit and delete buttons
                     text += "<tr id='row" + i + "'>"
                     text += "<td id='firstName" + i + "'><span>" + jsonObject.results[i].FirstName + "</span></td>";
@@ -206,9 +205,9 @@ function searchContacts()
                         "<button class='btn btn-warning btn-sm'  onclick='deleteContact(" + i + ")'>" + "<span>Delete</span>" + "</button>" + "</td>";
                     text += "<tr/>"
                 }
-                text += "</table>"
-				document.getElementById("tbody").innerHTML = text;
 			}
+            text += "</table>";
+			document.getElementById("tbody").innerHTML = text;
 		};
 		xhr.send(jsonPayload);
 	}
@@ -318,7 +317,6 @@ function addContact()
 	{
 		document.getElementById("contactAddResult").innerHTML = err.message;
 	}
-    searchContacts();
 }
 
 function deleteContact(rowNumber) 
@@ -666,10 +664,6 @@ function changeBackground(){
     else{
         document.body.style.background = 'url("../images/sunset.jpg") 0% 0% / cover no-repeat fixed';
     }
-    // document.body.style.width = "100%";
-    // document.body.style.height = "100vh";
-    // document.body.style.backgroundSize = "cover";
-    // document.body.style.backgroundAttachment = "fixed";
     if(document.getElementById("logo").src == "http://cop4331-18.online/images/sunset.png"){
         document.getElementById("logo").src = "../images/night_logo.png";
     }
